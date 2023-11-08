@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Top Header with Right-Aligned Menu</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" id="new-game-button">New Game</a></li>
+                <li><a href="#" id="reset-button">Reset</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="center-container">
+        <div class="buttons-container non-game-element">
+            <img src="./xo.gif" alt="XO" id="xoimg" class="xoimg">
+            <button id="play-human">Play Against Human</button>
+            <button id="play-computer">Play Against Computer</button>
+        </div>
+        <div class="player-inputs non-game-element" style="display: none;">
+            <h2>Enter Your Names</h2>
+            <div class="input-container">
+                <label for="player1">Player 1 Name:</label>
+                <input type="text" id="player1" placeholder="Enter Player 1's Name">
+            </div>
+            <div class="input-container">
+                <label for="player2">Player 2 Name:</label>
+                <input type="text" id="player2" placeholder="Enter Player 2's Name">
+            </div>
+            <button id="start-human-game" class="start-button">Start Game</button>
+        </div>
+        <div class="computer-inputs non-game-element" style="display: none;">
+            <h2>Play Against Computer</h2>
+            <div class="input-container">
+                <label for="computer-player">Your Name:</label>
+                <input type="text" id="computer-player" placeholder="Enter Your Name">
+            </div>
+            <div class="input-container">
+                <label for="play-mode">Select Play Mode:</label>
+                <select id="play-mode">
+                    <option value="easy">Easy</option>
+                    <option value="medium">Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            <button id="start-computer-game" class="start-button">Start Game</button>
+        </div>
+        <div class="error-message"></div>
+        <div class="game-container">
+            
+            <div class="score-panel">
+              <h2>Score Board</h2>
+              <div id="player1-display" class="player-display">
+                <span id="player1-name">Player 1</span>
+                <span id="player1-score">0</span>
+              </div>
+              <div id="player2-display" class="player-display">
+                <span id="player2-name">Player 2</span>
+                <span id="player2-score">0</span>
+              </div>
+            </div>
+            <div class="game-board">
+            </div>
+          </div>
+
+
+        <div id="turn" class="turn"></div>
+        
+        
+    <script src="script.js"></script>
+    
+</body>
+</html>
+

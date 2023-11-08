@@ -1,0 +1,254 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+    background-color: #000; 
+    color: #fff; 
+}
+
+header {
+    display : none ;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+.player-inputs,
+.computer-inputs,
+
+.center-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.xoimg {
+    max-width: 90%; 
+    height: auto; 
+}
+
+
+@media (min-width: 768px) {
+    .xoimg {
+        max-width: 30%; 
+    }
+}
+
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%; 
+}
+
+.buttons-container button:hover {
+    background-color: #000000; 
+}
+
+
+button {
+    padding: 20px 40px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#play-computer {
+    background-color: #000;
+}
+
+.player-inputs, .computer-inputs {
+    text-align: center;
+    display: none;
+    width: 80%; 
+    margin: 0 auto;
+}
+
+input[type="text"],
+select {
+    padding: 15px; 
+    margin: 10px 0; 
+    border: 2px solid #333; 
+    border-radius: 10px; 
+    width: calc(100% - 30px); 
+    font-size: 1.2em; 
+}
+
+label {
+    display: block;
+    margin-top: 20px; 
+    font-weight: bold;
+    font-size: 1.2em; 
+}
+
+h2 {
+    font-size: 2em; 
+    margin: 20px 0; 
+}
+
+#start-game, #start-computer-game {
+    background-color: #000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.game-container {
+    display: none;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 8px; 
+    width: 60vw; 
+    max-width: 400px; 
+    aspect-ratio: 1; 
+    margin: 20px auto;
+    background-color: #000;
+    padding: 8px;
+    box-sizing: border-box; 
+}
+
+.square {
+    background-color: #000; 
+    border: 2px solid #fff; 
+    aspect-ratio: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em; 
+    color: #fff; 
+    transition: background 0.2s;
+}
+
+
+
+
+.square:hover {
+    background: #ddd; 
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.score-panel {
+    display: none;
+    border: 1px solid #faf6f6;
+    padding: 20px;
+    margin-right: 20px;
+    border-radius: 5px;
+    width: 200px;
+    color:#ffffff; 
+    background-color: #000;
+}
+
+  
+  .player-display {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background: #0f0f0f;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .player-display span {
+    font-weight: bold;
+  }
+button {
+    padding: 15px 30px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease; 
+    text-transform: uppercase; 
+    font-weight: bold; 
+    outline: none; 
+}
+
+button:hover {
+    background-color: #222; 
+    border-color: #444; 
+}
+
+button:active {
+    transform: scale(0.98); 
+}
+
+button:focus {
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); 
+}
+
+button:disabled {
+    background-color: #555; 
+    cursor: not-allowed; 
+    opacity: 0.7; 
+}
+
+
+
+.winning-square {
+    background-color: green !important;
+}
+
+.error-message {
+    display: none; 
+    background-color: #FF0000; 
+    color: #FFF; 
+    padding: 10px; 
+    border-radius: 5px; 
+    margin: 10px 0; 
+}
+
+.turn {
+    text-align: center;
+    margin-top: 20px; 
+    font-size: 1.2em; 
+    color: #333; 
+  }
+  
+
