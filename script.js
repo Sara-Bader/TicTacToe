@@ -22,9 +22,11 @@ class Board {
     }
 
     beginGame() {
+
         this.assignSymbols();
         this.showHeader();
         this.hideNonGameElements(); 
+        this.createBoardUI(); 
         this.displayBoard();
         this.attachEventListeners();
         
@@ -63,7 +65,7 @@ class Board {
         this.currentPlayer = this.player1Symbol; 
         this.gameBoard.fill("");
         this.clearBoardUI();
-        this.updateBoardUI();
+        
     }
 
     displayBoard() {
@@ -125,12 +127,19 @@ class Board {
     }
     
     makeComputerMove() {
-        if (this.selectedPlayMode === "easy" || this.selectedPlayMode === "medium" || this.selectedPlayMode === "hard") {
-            this.computerMove(this.selectedPlayMode);
-        } else {
-            console.error("Unknown play mode selected");
-        }
+        this.isComputerTurn = true; 
+        setTimeout(() => {
+            if (this.selectedPlayMode === "easy") {
+                this.computerEasyMove();
+            } else if (this.selectedPlayMode === "medium") {
+                this.computerMediumMove();
+            } else if (this.selectedPlayMode === "hard") {
+                this.computerHardMove();
+            }
+            this.isComputerTurn = false; 
+        }, 500);
     }
+    
     
     computerMove(playMode) {
         let availablePositions = this.getAvailablePositions();
@@ -161,15 +170,26 @@ class Board {
     }
     
    
-
     makeMove(position) {
+        if (typeof position !== 'number' || position < 0 || position > 8) {
+            console.error('Invalid move position:', position);
+            return; 
+        }
+        if (this.isGameOver) {
+            console.error('Game is over. No more moves allowed.');
+            return; 
+        }
+    
+        if (this.currentPlayer !== this.player1Symbol && this.currentPlayer !== this.player2Symbol) {
+            console.error('Invalid current player symbol:', this.currentPlayer);
+            return; 
+        }
+    
         if (this.gameBoard[position] === "") {
             this.gameBoard[position] = this.currentPlayer;
             this.updateBoardUI(position);
     
-
             if (this.checkWin(this.currentPlayer)) {
-      
                 this.displayMessage(`${this.currentPlayer} wins!`);
                 this.updateScores(this.currentPlayer);
                 this.highlightWinningLine(this.getWinningCombo(this.currentPlayer));
@@ -183,7 +203,7 @@ class Board {
                     this.makeAIMove();
                 }
             }
-        }
+        } 
     }
     
     makeAIMove() {
@@ -271,20 +291,19 @@ class Board {
             return bestScore;
         }
     }
-    
+
+
     updateBoardUI(position) {
-    
-        if (this.boardContainer.children.length !== 9) {
-            return; 
-        }
     
         const square = this.boardContainer.children[position];
         if (!square) {
+
             return; 
         }
-     square.innerText = this.currentPlayer;
+        square.innerText = this.currentPlayer;
         square.classList.add(this.currentPlayer);
     }
+    
     
     
     switchPlayer() {
@@ -330,17 +349,18 @@ class Board {
     }
 
     handleSquareClick(event) {
+        if (this.isComputerTurn) {n
+            return;
+        }
         if (event.target.classList.contains("square")) {
             const squareIndex = Array.from(this.boardContainer.children).indexOf(event.target);
             this.makeMove(squareIndex);
         }
-       
     }
+    
 }
 
 
-
-// Create the board object once
 const gameBoardContainer = document.querySelector(".game-board");
 const board = new Board(gameBoardContainer);
 
@@ -363,6 +383,7 @@ document.addEventListener("DOMContentLoaded", function () {
         board.beginGame();
     });
 
+   
     newGameButton.addEventListener("click", function () {
         location.reload();
     });
@@ -373,7 +394,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     playComputerButton.addEventListener("click", function () {
-        console.log("playComputerButton clicked"); // Add this line for debugging
+        console.log("playComputerButton clicked"); 
         board.isHumanGame = false;
         setupGame();
     });
