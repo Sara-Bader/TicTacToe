@@ -51,12 +51,13 @@ class Board {
 
     createBoardUI() {
         this.boardContainer.innerHTML = ''; 
-        for (let i = 0; i < 9; i++) { 
+        for (let i = 0; i < 9; i++) {
             const square = document.createElement('div');
             square.classList.add('square');
             this.boardContainer.appendChild(square);
         }
     }
+    
 
     reset() {
         this.currentPlayer = this.player1Symbol; 
@@ -124,20 +125,21 @@ class Board {
     }
     
     makeComputerMove() {
-        switch (this.selectedPlayMode) {
-            case "easy":
-                this.computerEasyMove();
-                break;
-            case "medium":
-                this.computerMediumMove();
-                break;
-            case "hard":
-                this.computerHardMove();
-                break;
-            default:
-                console.error("Unknown play mode selected");
+        if (this.selectedPlayMode === "easy" || this.selectedPlayMode === "medium" || this.selectedPlayMode === "hard") {
+            this.computerMove(this.selectedPlayMode);
+        } else {
+            console.error("Unknown play mode selected");
         }
     }
+    
+    computerMove(playMode) {
+        let availablePositions = this.getAvailablePositions();
+        if (availablePositions.length > 0) {
+            let randomIndex = Math.floor(Math.random() * availablePositions.length);
+            this.makeMove(availablePositions[randomIndex]);
+        }
+    }
+    
         
 
     computerEasyMove() {
@@ -195,8 +197,7 @@ class Board {
             }
         }, 500);
     }
-    
-    // Make sure this function exists and returns the indices of the winning line
+   
     getWinningCombo(player) {
         const winCombos = [
             [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -212,18 +213,7 @@ class Board {
     
         return null; // No winning combo found
     }
-    
-    // Add this function if it doesn't exist
-    highlightWinningLine(combo) {
-        combo.forEach(index => {
-            const winningSquare = this.boardContainer.children[index];
-            winningSquare.classList.add('winner'); // Use a class to style the winning squares
-        });
-    }
-    
-
-    
-    
+     
      computerMediumMove() {
         if (Math.random() < 0.5) {
             this.computerEasyMove(); 
@@ -284,21 +274,15 @@ class Board {
     
     updateBoardUI(position) {
     
-        console.log('Board Container innerHTML before update:', this.boardContainer.innerHTML);
-    
-        // Check if the boardContainer has the correct number of children
         if (this.boardContainer.children.length !== 9) {
-            console.error('Expected 9 squares, but found:', this.boardContainer.children.length);
-            return; // Exit the function to avoid further errors
+            return; 
         }
     
         const square = this.boardContainer.children[position];
         if (!square) {
-            console.error('Square element not found at position:', position);
-            return; // Exit the function to avoid further errors
+            return; 
         }
-    
-        square.innerText = this.currentPlayer;
+     square.innerText = this.currentPlayer;
         square.classList.add(this.currentPlayer);
     }
     
@@ -352,15 +336,6 @@ class Board {
         }
        
     }
-
-
-    ggetAvailablePositions() {
-        return this.gameBoard
-            .map((value, index) => value === "" ? index : null)
-            .filter(value => value !== null);
-    }
-    
-
 }
 
 
